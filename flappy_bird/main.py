@@ -1,10 +1,5 @@
-# from curses.ascii import SP
-# from shutil import move
-# from subprocess import CREATE_NEW_PROCESS_GROUP
-from hashlib import new
-from sqlite3 import SQLITE_CREATE_TEMP_INDEX
 import pygame, sys, random
-
+# some comments
 def draw_floor():
     screen.blit(floor_sur, (floor_x, 600))
     screen.blit(floor_sur, (floor_x + 430, 600))
@@ -121,8 +116,8 @@ pipe_sur = pygame.image.load('pipe-red.png')
 pipe_sur = pygame.transform.scale2x(pipe_sur)
 pipe_list = []
 SPAWNPIPE = pygame.USEREVENT
-pygame.time.set_timer(SPAWNPIPE, 900)
-pipe_height = [250, 350, 500]
+pygame.time.set_timer(SPAWNPIPE, 850)
+pipe_height = [200, 300, 400]
 
 game_over_sur = pygame.image.load('message.png').convert_alpha()
 game_over_rect = game_over_sur.get_rect(center = (215, 310))
@@ -142,7 +137,7 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and game_active:
                 bird_movement = 0
-                bird_movement -= 8
+                bird_movement -= 10
                 flap_sound.play()
             if event.key == pygame.K_SPACE and game_active == False:
                 game_active = True
@@ -193,4 +188,4 @@ while True:
 
 
     pygame.display.update()
-    clock.tick(80)
+    clock.tick(100)
