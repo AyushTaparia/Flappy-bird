@@ -1,5 +1,5 @@
 import pygame, sys, random
-
+# some comments
 def draw_floor():
     screen.blit(floor_sur, (floor_x, 600))
     screen.blit(floor_sur, (floor_x + 430, 600))
