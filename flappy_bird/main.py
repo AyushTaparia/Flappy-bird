@@ -128,64 +128,66 @@ score_sound = pygame.mixer.Sound('audio_point.wav')
 die_sound = pygame.mixer.Sound('audio_die.wav')
 score_sound_countdown = 100
 
-while True:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            sys.exit()
-        
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and game_active:
-                bird_movement = 0
-                bird_movement -= 10
-                flap_sound.play()
-            if event.key == pygame.K_SPACE and game_active == False:
-                game_active = True
-                pipe_list.clear()
-                bird_rect.center = (100, 300)
-                bird_movement = 0
-                score = 0
+if __name__ == '__main__':
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
             
-        if event.type == SPAWNPIPE:
-            pipe_list.extend(create_pipe())
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE and game_active:
+                    bird_movement = 0
+                    bird_movement -= 10
+                    flap_sound.play()
+                if event.key == pygame.K_SPACE and game_active == False:
+                    game_active = True
+                    pipe_list.clear()
+                    bird_rect.center = (100, 300)
+                    bird_movement = 0
+                    score = 0
+                
+            if event.type == SPAWNPIPE:
+                pipe_list.extend(create_pipe())
 
-        if event.type == BIRDFLAP:
-            if bird_index < 2:
-                bird_index += 1
-            else:
-                bird_index = 0
+            if event.type == BIRDFLAP:
+                if bird_index < 2:
+                    bird_index += 1
+                else:
+                    bird_index = 0
 
-            bird_sur,bird_rect = bird_animation()
+                bird_sur,bird_rect = bird_animation()
 
-    screen.blit(background, (0,0))
-
-
-    if game_active:
-        # bird
-        bird_movement += gravity
-        rotated_bird = rotate_bird(bird_sur)
-        bird_rect.centery += bird_movement
-        screen.blit(rotated_bird, bird_rect)
-        game_active = check_collison(pipe_list)
-
-        # pipes
-        pipe_list = move_pipes(pipe_list)
-        draw_pipes(pipe_list)
-
-        # scores
-        pipe_score_check()
-        score_display('main_game')
-    else:
-        screen.blit(game_over_sur, game_over_rect)
-        high_score = update_score(score, high_score)
-        score_display('game_over')
-
-    # floor
-    floor_x -= 1
-    draw_floor()
-    if floor_x <= -430:
-        floor_x = 0
+        screen.blit(background, (0,0))
 
 
-    pygame.display.update()
-    clock.tick(100)
+        if game_active:
+            # bird
+            bird_movement += gravity
+            rotated_bird = rotate_bird(bird_sur)
+            bird_rect.centery += bird_movement
+            screen.blit(rotated_bird, bird_rect)
+            game_active = check_collison(pipe_list)
+
+            # pipes
+            pipe_list = move_pipes(pipe_list)
+            draw_pipes(pipe_list)
+
+            # scores
+            pipe_score_check()
+            score_display('main_game')
+        else:
+            screen.blit(game_over_sur, game_over_rect)
+            high_score = update_score(score, high_score)
+            score_display('game_over')
+
+        # floor
+        floor_x -= 1
+        draw_floor()
+        if floor_x <= -430:
+            floor_x = 0
+
+
+        pygame.display.update()
+        clock.tick(100)
