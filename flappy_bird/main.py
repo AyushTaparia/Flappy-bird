@@ -128,6 +128,7 @@ score_sound = pygame.mixer.Sound('audio_point.wav')
 die_sound = pygame.mixer.Sound('audio_die.wav')
 score_sound_countdown = 100
 
+#main function
 if __name__ == '__main__':
 
     while True:
