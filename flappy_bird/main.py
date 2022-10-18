@@ -117,7 +117,7 @@ pipe_sur = pygame.transform.scale2x(pipe_sur)
 pipe_list = []
 SPAWNPIPE = pygame.USEREVENT
 pygame.time.set_timer(SPAWNPIPE, 850)
-pipe_height = [200, 300, 400]
+pipe_height = [250, 350, 450]
 
 game_over_sur = pygame.image.load('message.png').convert_alpha()
 game_over_rect = game_over_sur.get_rect(center = (215, 310))
